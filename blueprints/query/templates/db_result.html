@@ -1,0 +1,32 @@
+{% extends "main_menu.html" %}
+      {% block content %}
+      <h2>{{title}}
+      <a href="{{add_link}}"  style="display: {{add_display}}"  >
+            <button class="btn btn-primary " type="button">
+                Добавить новую запись
+            </button>
+            </a>
+      </h2>
+      <h5>{{supplier}}</h5>
+      <div class="table-responsive small">
+        <table class="table table-striped table-bordered border-primary table-responsive-lg table-hover">
+          <thead>
+            <tr>
+                {% for key in schema %} <!--Jinja подставит сюда функцию -->
+                        <th scope="col">{{key}}</th>
+                    {% endfor %}
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+                 {% for value in result %}
+                <tr>
+                        {% for key in schema %} <!--Jinja подставит сюда функцию -->
+                            <td>{{value[key]}}</td>
+                        {% endfor %}
+                </tr>
+                    {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endblock %}

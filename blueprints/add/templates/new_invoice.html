@@ -1,0 +1,104 @@
+{% extends 'main_menu.html' %}
+{% block content %}
+    <h2>{{title}}</h2> <!--Накладная № {{invoice_num}} от {{curr_date}}-->
+    <div class="container">
+        <div class="row-my-4">
+            <div class="col-lg-12 mx-auto">
+                <div class="card shadow">
+                    <form class="needs-validation" action="#" method="POST" id="add_form" novalidate>
+
+                    <div class="card-header">
+                        <h3>Накладная № {{invoice_num}} от {{curr_date}}</h3>
+                        <div class="row">
+                            <div class="col-sm-auto align-self-center">
+                           <h5>Поставщик:</h5>
+                            </div>
+                            <div class="col-sm-3 align-self-center">
+                        <h5>
+                            <select class="form-select sm align-self-center" name="supplier" id="supp-select" required>
+                                            <option selected disabled value>Поставщик</option>
+                                            {% for supplier in suppliers %}
+                                            <option value={{supplier['s_id']}}>{{supplier['s_name']}}</option>
+                                            {% endfor %}
+                                        </select>
+                        </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                            <div id="show_item">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <select class="form-select" name="product" id="prod-select" required>
+                                            <option selected disabled value>Название товара</option>
+                                            {% for product in products %}
+                                            <option value={{product['p_id']}}>{{product['p_name']}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <input type="text" name="amount" class="form-control"
+                                        placeholder="Количество" required >
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <input type="text" name="price" class="form-control"
+                                        placeholder="Цена" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                             <div class="row">
+                                   <div class="col-md-5 mb-3 d-grid justify-content-end">
+                                <input type="submit" value="Записать и вывести таблицу" class="btn btn-success w-100" id="accept_btn">
+                                   </div>
+                            <div class="col-md-auto mb-3 d-grid">
+                                <button class="btn btn-primary add_item_btn">Добавить строку</button>
+                            </div>
+                             </div>
+
+                    </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/jquery.min.js"> </script>
+<script>
+    $(document).ready(function (){
+        $(".add_item_btn").click(function (e) {
+            e.preventDefault();
+            $("#show_item").append(`<div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <select class="form-select" name="product" id="prod-select" required>
+                                            <option selected disabled value>Название товара</option>
+                                            {% for product in products %}
+                                            <option value={{product['p_id']}}>{{product['p_name']}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <input type="text" name="amount" class="form-control"
+                                        placeholder="Количество" required >
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <input type="text" name="price" class="form-control"
+                                        placeholder="Цена" required>
+                                    </div>
+                                    <div class="col-md-2 mb-3 d-grid">
+                                        <button class="btn btn-danger remove_item_btn">Удалить строку</button>
+                                    </div>
+                                </div>`);
+        });
+    });
+
+    $(document).on('click', '.remove_item_btn', function(e) {
+        e.preventDefault();
+        let row_item = $(this).parent().parent();
+        $(row_item).remove();
+    });
+</script>
+<script src="/static/sign-in/validation.js"></script>
+{% endblock scripts %}

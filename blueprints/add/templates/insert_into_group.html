@@ -1,0 +1,17 @@
+{% extends 'insert_into_product.html' %}
+{% block card %}
+<form class="needs-validation" action="#" method="POST" id="add_form" novalidate>
+<div class="card-header">
+    <h3><input type="text" name="g_name" class="form-control"
+               placeholder="Название группы товаров" required ></h3>
+
+ <div>
+    <input type="submit" value="Записать и вывести таблицу" class="btn btn-success w-25" id="accept_btn">
+    </div>
+    <div class="alert alert-danger" role="alert" style="display: {{err_dis}}">
+                              {{error}}
+                            </div>
+</div>
+</form>
+<script src="/static/sign-in/validation.js"></script>
+{% endblock %}

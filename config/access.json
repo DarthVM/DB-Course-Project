@@ -1,0 +1,12 @@
+{
+  "p_manager": {
+    "user": "Менеджер по закупкам",
+    "add_display": "none",
+    "add_invoice": "none"
+  },
+
+  "warehouse": {
+    "user": "Начальник склада",
+    "reports_dis": "none !important"
+  }
+}

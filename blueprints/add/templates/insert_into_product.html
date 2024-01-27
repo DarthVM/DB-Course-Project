@@ -1,0 +1,47 @@
+{% extends 'main_menu.html' %}
+{% block content %}
+    <h2>{{title}}</h2> <!--Накладная № {{invoice_num}} от {{curr_date}}-->
+    <div class="container">
+        <div class="row-my-4">
+            <div class="col-lg-12 mx-auto">
+                <div class="card shadow">
+                    <form class="needs-validation" action="#" method="POST" id="add_form" novalidate>
+                        {% block card %}
+                    <div class="card-header">
+
+                        <h3><input type="text" name="p_name" class="form-control" required
+                                        placeholder="Название товара"></h3>
+                    </div>
+                    <div class="card-body p-4">
+                            <div id="show_item">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <input type="text" name="m_unit" class="form-control"
+                                        placeholder="Единица измерения" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <select class="form-select" name="group" id="prod-select" required>
+                                            <option selected disabled value>Название группы</option>
+                                            {% for group in groups %}
+                                            <option value={{group['Название группы']}}>{{group['Название группы']}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="submit" value="Записать и вывести таблицу" class="btn btn-success w-25" id="accept_btn">
+                            </div>
+                            <div class="alert alert-danger" role="alert" style="display: {{err_dis}}">
+                              {{error}}
+                            </div>
+                    </div>
+                        {% endblock card %}
+                        </form>
+                    <div class="error-decor">{{error}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/static/sign-in/validation.js"></script>
+{% endblock %}
